@@ -1,0 +1,28 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>Swisschain.Hedger.Hedger.Worker</AssemblyName>
+    <RootNamespace>Hedger.Worker</RootNamespace>
+    <UserSecretsId>10614706-b35e-4617-be0e-494dce79e9fb</UserSecretsId>
+    <LangVersion>8.0</LangVersion>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="MassTransit.Extensions.DependencyInjection" Version="6.2.5" />
+    <PackageReference Include="MassTransit.RabbitMQ" Version="6.2.5" />
+    <PackageReference Include="Swisschain.Sdk.Server" Version="6.3.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Hedger.Common\Hedger.Common.csproj" />
+    <ProjectReference Include="..\Hedger.MessagingContract\Hedger.MessagingContract.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Dockerfile">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+</Project>

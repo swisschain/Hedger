@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>Swisschain.Hedger.Hedger.MessagingContract</AssemblyName>
+    <PackageId>Swisschain.Hedger.Hedger.MessagingContract</PackageId>
+    <RootNamespace>Swisschain.Hedger.Hedger.MessagingContract</RootNamespace>
+    <Authors>Swisschain</Authors>
+    <Product>Hedger</Product>
+  </PropertyGroup>
+
+</Project>

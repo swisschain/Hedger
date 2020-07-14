@@ -1,0 +1,14 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>Hedger.Hedger.TestClient</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\Hedger.ApiClient\Hedger.ApiClient.csproj" />
+    <ProjectReference Include="..\..\src\Hedger.ApiContract\Hedger.ApiContract.csproj" />
+  </ItemGroup>
+
+</Project>

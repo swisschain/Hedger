@@ -23,27 +23,27 @@ namespace Hedger.Worker
 
             services.AddHttpClient();
 
-            services.AddMassTransit(x =>
-            {
-                x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
-                {
-                    cfg.Host(Config.RabbitMq.HostUrl, host =>
-                    {
-                        host.Username(Config.RabbitMq.Username);
-                        host.Password(Config.RabbitMq.Password);
-                    });
+            //services.AddMassTransit(x =>
+            //{
+            //    x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
+            //    {
+            //        cfg.Host(Config.RabbitMq.HostUrl, host =>
+            //        {
+            //            host.Username(Config.RabbitMq.Username);
+            //            host.Password(Config.RabbitMq.Password);
+            //        });
 
-                    cfg.UseMessageRetry(y =>
-                        y.Exponential(5,
-                            TimeSpan.FromMilliseconds(100),
-                            TimeSpan.FromMilliseconds(10_000),
-                            TimeSpan.FromMilliseconds(100)));
+            //        cfg.UseMessageRetry(y =>
+            //            y.Exponential(5,
+            //                TimeSpan.FromMilliseconds(100),
+            //                TimeSpan.FromMilliseconds(10_000),
+            //                TimeSpan.FromMilliseconds(100)));
 
-                    cfg.SetLoggerFactory(provider.GetRequiredService<ILoggerFactory>());
-                }));
+            //        cfg.SetLoggerFactory(provider.GetRequiredService<ILoggerFactory>());
+            //    }));
+            //});
 
-                services.AddHostedService<BusHost>();
-            });
+            //services.AddHostedService<BusHost>();
         }
     }
 }

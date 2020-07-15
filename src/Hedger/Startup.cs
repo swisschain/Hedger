@@ -22,23 +22,22 @@ namespace Hedger
         {
             base.ConfigureServicesExt(services);
 
-            services.AddMassTransit(x =>
-            {
-                x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
-                {
-                    cfg.Host(Config.RabbitMq.HostUrl,
-                        host =>
-                        {
-                            host.Username(Config.RabbitMq.Username);
-                            host.Password(Config.RabbitMq.Password);
-                        });
+            //services.AddMassTransit(x =>
+            //{
+            //    x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
+            //    {
+            //        cfg.Host(Config.RabbitMq.HostUrl,
+            //            host =>
+            //            {
+            //                host.Username(Config.RabbitMq.Username);
+            //                host.Password(Config.RabbitMq.Password);
+            //            });
 
-                    cfg.SetLoggerFactory(provider.GetRequiredService<ILoggerFactory>());
-                }));
+            //        cfg.SetLoggerFactory(provider.GetRequiredService<ILoggerFactory>());
+            //    }));
+            //});
 
-                services.AddHostedService<BusHost>();
-
-            });
+            //services.AddHostedService<BusHost>();
         }
 
         protected override void RegisterEndpoints(IEndpointRouteBuilder endpoints)

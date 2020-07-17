@@ -128,7 +128,7 @@ backet update:
 
 > IF (Backet[Trade.BaseAsset].QuoteAsset != Trade.quoteAsset)
 
-var CrossVolume = - ( TradeVolumeOpposite * [<QuoteAsset>/USD].Price( TradeVolumeOpposite > 0 ? "ask" : "bid" ) );
+var CrossVolume = - ( TradeVolumeOpposite * BaseBacket[Trade.QuoteAsset].Price( TradeVolumeOpposite > 0 ? "ask" : "bid" ) );
 
 | backet | price | volume | oppositeVolume |
 | ------ | ----- | ------ | -------------- |
@@ -158,13 +158,13 @@ Trade:
 
 > IF (Backet[Trade.BaseAsset].QuoteAsset != Trade.quoteAsset)
 
-var CrossVolume = - ( TradeVolumeOpposite * [<QuoteAsset>/USD].Price( TradeVolumeOpposite > 0 ? "ask" : "bid" ) );
+var CrossVolume = - ( TradeVolumeOpposite * BaseBacket[Trade.QuoteAsset].Price( TradeVolumeOpposite > 0 ? "ask" : "bid" ) );
 
 | backet | price | volume | oppositeVolume |
 | ------ | ----- | ------ | -------------- |
 | LKKBTC | | | |
-| ETHUSD | | | |
 | BTCUSD | | | |
+| ETHUSD | | | |
 
 
 

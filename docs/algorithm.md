@@ -36,9 +36,9 @@ Params:
 
 ### 1. Receive Trade
 
-### 2. Put trade in position list
+### 2. Put the trade into position list
 
-### 3. WHILE in position list exist position by instrumnet without bucket
+### 3. WHILE in position list exists a position with an instrument wich is not bucket
 
 ### 3.1. exclude position
 

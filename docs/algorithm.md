@@ -1,7 +1,7 @@
 # Source data
 
-* subscribe to trades from account
-* subscribe market prices
+* subscribe to trades stream from account
+* subscribe to market prices stream
 
 # Model
 

@@ -19,22 +19,22 @@ As bucket we will use pairs of the form: Traded asset to USD.
 
 # Algorithm to handle incoming trade
 
-1. Receive Trade:
+### 1. Receive Trade:
 
 * asset pair: **Trade.BaseAsset** / **Trader.QuoteAsset**
 * price: **Trade.Price**
 * volume: **Trade.Volume**  Volume include direction: `sell` - negative value, `buy` - positive value
 * opposite volume: **Trade.VolumeOpposite**
 
-2. Get backet for **Trade.BaseAsset** = BaseBacket
+### 2. Get backet for **Trade.BaseAsset** = BaseBacket
 
-3. IF (BaseBacket[Trade.BaseAsset].QuoteAsset == Trade.quoteAsset)
+### 3. IF (BaseBacket[Trade.BaseAsset].QuoteAsset == Trade.quoteAsset)
 
 | backet | price | volume | oppositeVolume |
 | ------ | ----- | ------ | -------------- |
 | BTCUSD | ABS ( TradeVolumeOpposite / TradeVolume) | TradeVolume | TradeVolumeOpposite |
 
-4. IF (BaseBacket[Trade.BaseAsset].QuoteAsset != Trade.quoteAsset)
+### 4. IF (BaseBacket[Trade.BaseAsset].QuoteAsset != Trade.quoteAsset)
 
 var CrossVolume = - ( TradeVolumeOpposite * [<QuoteAsset>/USD].Price( TradeVolumeOpposite > 0 ? "ask" : "bid" ) );
 
@@ -43,7 +43,7 @@ var CrossVolume = - ( TradeVolumeOpposite * [<QuoteAsset>/USD].Price( TradeVolum
 | BTCUSD | ABS( CrossVolume / TradeVolume ) | TradeVolume | -CrossVolume |
 | EURUSD | ABS( -CrossVolume / TradeVolumeOpposite ) | TradeVolumeOpposite | CrossVolume |
 
-5. Log change backet and appy change to backet aggregate position
+### 5. Log change backet and appy change to backet aggregate position
 
 
 

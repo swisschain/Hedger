@@ -5,8 +5,8 @@
 
 # Model
 
-**Bucket** - selected base asset pairs in the context of which trade positions are managed.
-Received trades are re-calculated as positions in **buckets**.
+**Bucket** - selected base asset pairs in the context of which trade positions are managed.  
+Received trades are re-calculated as positions in buckets.
 
 Params:
 
@@ -17,7 +17,7 @@ Params:
 | `HadgeTradingPair` | the trading instrument in which the basket position is hedged (`Backet Asset`/`Quote Asset` or `Quote Asset`/`Backet Asset`) |
 | `Price` | Current market prices by baccket instrument |
 
-As bucket we will use pairs of the form: Traded asset to USD.
+As a bucket we use an asset pair in the form of Asset/USD.
 
 **Trade** - deal on the observable account
 

@@ -48,16 +48,16 @@ Params:
 
 | backet | price | volume | oppositeVolume |
 | ------ | ----- | ------ | -------------- |
-| BTCUSD | ABS ( TradeVolumeOpposite / TradeVolume) | TradeVolume | TradeVolumeOpposite |
+| Backet[Position.BaseAsset] | ABS ( TradeVolumeOpposite / TradeVolume) | TradeVolume | TradeVolumeOpposite |
 
 ### 3.4. IF (BaseBacket.QuoteAsset != Trade.quoteAsset)
 
-var CrossVolume = - ( TradeVolumeOpposite * BaseBacket[Trade.QuoteAsset].Price( TradeVolumeOpposite > 0 ? "ask" : "bid" ) );
+var CrossVolume = - ( TradeVolumeOpposite * BaseBacket[Position.QuoteAsset].Price( TradeVolumeOpposite > 0 ? "ask" : "bid" ) );
 
 | backet | price | volume | oppositeVolume |
 | ------ | ----- | ------ | -------------- |
-| BTCUSD | ABS( CrossVolume / TradeVolume ) | TradeVolume | -CrossVolume |
-| EURUSD | ABS( -CrossVolume / TradeVolumeOpposite ) | TradeVolumeOpposite | CrossVolume |
+| Backet[Position.BaseAsset] | ABS( CrossVolume / TradeVolume ) | TradeVolume | -CrossVolume |
+| Backet[Position.QuoteAsset] | ABS( -CrossVolume / TradeVolumeOpposite ) | TradeVolumeOpposite | CrossVolume |
 
 ### 4. Log change backet and appy change to backet aggregate position
 

@@ -34,17 +34,23 @@ Params:
 
 # Algorithm to handle incoming trade
 
-### 1. Receive Trade:
+### 1. Receive Trade
 
-### 2. Get backet for **Trade.BaseAsset** = BaseBacket
+### 2. Put trade in position list
 
-### 3. IF (BaseBacket[Trade.BaseAsset].QuoteAsset == Trade.quoteAsset)
+### 3 WHILE in position list exist position by instrumnet without backet
+
+### 3.1. exclude position
+
+### 3.2. Get backet for **Position.BaseAsset** = BaseBacket
+
+### 3.3. IF (BaseBacket.QuoteAsset == Position.QuoteAsset)
 
 | backet | price | volume | oppositeVolume |
 | ------ | ----- | ------ | -------------- |
 | BTCUSD | ABS ( TradeVolumeOpposite / TradeVolume) | TradeVolume | TradeVolumeOpposite |
 
-### 4. IF (BaseBacket[Trade.BaseAsset].QuoteAsset != Trade.quoteAsset)
+### 3.4. IF (BaseBacket.QuoteAsset != Trade.quoteAsset)
 
 var CrossVolume = - ( TradeVolumeOpposite * BaseBacket[Trade.QuoteAsset].Price( TradeVolumeOpposite > 0 ? "ask" : "bid" ) );
 
@@ -53,7 +59,7 @@ var CrossVolume = - ( TradeVolumeOpposite * BaseBacket[Trade.QuoteAsset].Price( 
 | BTCUSD | ABS( CrossVolume / TradeVolume ) | TradeVolume | -CrossVolume |
 | EURUSD | ABS( -CrossVolume / TradeVolumeOpposite ) | TradeVolumeOpposite | CrossVolume |
 
-### 5. Log change backet and appy change to backet aggregate position
+### 4. Log change backet and appy change to backet aggregate position
 
 
 

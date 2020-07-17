@@ -9,6 +9,7 @@
 Received trades are re-calculated in Buckets.
 
 Backet params:
+
 * **Backet Asset**
 * Quote Asset
 * Hadge Trading Pair (`Backet Asset`/`Quote Asset` or `Quote Asset`/`Backet Asset`)
@@ -18,6 +19,7 @@ As bucket we will use pairs of the form: Traded asset to USD.
 # Algorithm to handle incoming trade
 
 1. Receive Trade:
+
 ** asset pair: **Trade.BaseAsset** / **Trader.QuoteAsset**
 ** price: **Trade.Price**
 ** volume: **Trade.Volume**  Volume include direction: `sell` - negative value, `buy` - positive value
@@ -49,14 +51,17 @@ var CrossVolume = - ( TradeVolumeOpposite * [<QuoteAsset>/USD].Price( TradeVolum
 ## Example 1
 
 Market:
+
 * BTCUSD: bid = 9200 ask = 9210
 
 Backets:
+
 * BTCUSD
 
 ---
 
 Trade:
+
 * AssetPair = BTCUSD
 * Price = 9210
 * volume = 2 (`buy`)
@@ -81,17 +86,20 @@ backet update:
 ## Example 2
 
 Market:
+
 * BTCUSD: bid = 9200 ask = 9210
 * EURUSD: bid = 1.14050 ask = 1.14055
 * BTCEUR: bid = 8066 ask = 8075
 
 Backets:
+
 * BTCUSD
 * EURUSD
 
 ---
 
 Trade:
+
 * AssetPair = BTCEUR
 * Price = 8078
 * volume = 1.5 (`buy`)
@@ -122,12 +130,14 @@ var CrossVolume = - ( TradeVolumeOpposite * [<QuoteAsset>/USD].Price( TradeVolum
 **Example 3:**
 
 Backets:
+
 * BTCUSD
 * ETHUSD
 
 ---
 
 Trade:
+
 * AssetPair = ETHBTC
 * Price = 
 * volume = 

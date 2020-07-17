@@ -11,6 +11,7 @@ Received trades are re-calculated in Buckets.
 Backet params:
 
 * **Backet Asset**
+
 * Quote Asset
 * Hadge Trading Pair (`Backet Asset`/`Quote Asset` or `Quote Asset`/`Backet Asset`)
 
@@ -20,10 +21,10 @@ As bucket we will use pairs of the form: Traded asset to USD.
 
 1. Receive Trade:
 
-** asset pair: **Trade.BaseAsset** / **Trader.QuoteAsset**
-** price: **Trade.Price**
-** volume: **Trade.Volume**  Volume include direction: `sell` - negative value, `buy` - positive value
-** opposite volume: **Trade.VolumeOpposite**
+* asset pair: **Trade.BaseAsset** / **Trader.QuoteAsset**
+* price: **Trade.Price**
+* volume: **Trade.Volume**  Volume include direction: `sell` - negative value, `buy` - positive value
+* opposite volume: **Trade.VolumeOpposite**
 
 2. Get backet for **Trade.BaseAsset** = BaseBacket
 

@@ -8,15 +8,28 @@
 **Bucket** - selected base pairs in the context of which trade positions are managed.
 Received trades are re-calculated in Buckets.
 
-Backet params:
+Params:
 
 | name | description |
 | ---- | ----------- |
-| `Backet Asset` | asset associated with the basket |
-| Quote Asset | asset to which the hedging position is quoted |
-| Hadge Trading Pair | the trading instrument in which the basket position is hedged (`Backet Asset`/`Quote Asset` or `Quote Asset`/`Backet Asset`) |
+| `Asset` | asset associated with the basket |
+| QuoteAsset | asset to which the hedging position is quoted |
+| HadgeTradingPair | the trading instrument in which the basket position is hedged (`Backet Asset`/`Quote Asset` or `Quote Asset`/`Backet Asset`) |
 
 As bucket we will use pairs of the form: Traded asset to USD.
+
+**Trade** - deal on the observable account
+
+Params:
+
+| name | description |
+| ---- | ----------- |
+| AssetPair | trading instrument |
+| BaseAsset | base asset in trading instrument (BTC for BTC/USD)  |
+| QuoteAsset | quote asset in trading instrument (USD for BTC/USD) |
+| Price | trading price |
+| Volume | trade volume in base asset |
+| VolumeOpposite | trade volume in quote asset |
 
 # Algorithm to handle incoming trade
 

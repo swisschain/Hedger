@@ -35,11 +35,6 @@ Params:
 
 ### 1. Receive Trade:
 
-* asset pair: **Trade.BaseAsset** / **Trader.QuoteAsset**
-* price: **Trade.Price**
-* volume: **Trade.Volume**
-* opposite volume: **Trade.VolumeOpposite**
-
 ### 2. Get backet for **Trade.BaseAsset** = BaseBacket
 
 ### 3. IF (BaseBacket[Trade.BaseAsset].QuoteAsset == Trade.quoteAsset)

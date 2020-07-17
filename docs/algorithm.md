@@ -15,6 +15,7 @@ Params:
 | `Asset` | asset associated with the basket |
 | `QuoteAsset` | asset to which the hedging position is quoted |
 | `HadgeTradingPair` | the trading instrument in which the basket position is hedged (`Backet Asset`/`Quote Asset` or `Quote Asset`/`Backet Asset`) |
+| `Price` | Current market prices by baccket instrument |
 
 As bucket we will use pairs of the form: Traded asset to USD.
 
@@ -45,7 +46,7 @@ Params:
 
 ### 4. IF (BaseBacket[Trade.BaseAsset].QuoteAsset != Trade.quoteAsset)
 
-var CrossVolume = - ( TradeVolumeOpposite * [<QuoteAsset>/USD].Price( TradeVolumeOpposite > 0 ? "ask" : "bid" ) );
+var CrossVolume = - ( TradeVolumeOpposite * BaseBacket[Trade.QuoteAsset].Price( TradeVolumeOpposite > 0 ? "ask" : "bid" ) );
 
 | backet | price | volume | oppositeVolume |
 | ------ | ----- | ------ | -------------- |

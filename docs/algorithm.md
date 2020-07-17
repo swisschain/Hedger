@@ -1,12 +1,12 @@
 # Source data
 
-* subscribe to trades stream from account
-* subscribe to market prices stream
+* subscribe to trades stream from internal account
+* subscribe to market prices stream from external venues
 
 # Model
 
-**Bucket** - selected base pairs in the context of which trade positions are managed.
-Received trades are re-calculated in Buckets.
+**Bucket** - selected base asset pairs in the context of which trade positions are managed.
+Received trades are re-calculated as positions in **buckets**.
 
 Params:
 

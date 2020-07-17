@@ -10,10 +10,11 @@ Received trades are re-calculated in Buckets.
 
 Backet params:
 
-* **Backet Asset**
-
-* Quote Asset
-* Hadge Trading Pair (`Backet Asset`/`Quote Asset` or `Quote Asset`/`Backet Asset`)
+| name | description |
+| ---- | ----------- |
+| `Backet Asset` | asset associated with the basket |
+| Quote Asset | asset to which the hedging position is quoted |
+| Hadge Trading Pair | the trading instrument in which the basket position is hedged (`Backet Asset`/`Quote Asset` or `Quote Asset`/`Backet Asset`) |
 
 As bucket we will use pairs of the form: Traded asset to USD.
 

@@ -28,8 +28,8 @@ Params:
 | BaseAsset | base asset in trading instrument (BTC for BTC/USD)  |
 | QuoteAsset | quote asset in trading instrument (USD for BTC/USD) |
 | Price | trading price |
-| Volume | trade volume in base asset |
-| VolumeOpposite | trade volume in quote asset |
+| Volume | trade volume in base asset. Include direction: `sell` - negative value, `buy` - positive value |
+| VolumeOpposite | trade volume in quote asset. include direction: `sell` - positive value, `buy` - negative value |
 
 # Algorithm to handle incoming trade
 
@@ -37,7 +37,7 @@ Params:
 
 * asset pair: **Trade.BaseAsset** / **Trader.QuoteAsset**
 * price: **Trade.Price**
-* volume: **Trade.Volume**  Volume include direction: `sell` - negative value, `buy` - positive value
+* volume: **Trade.Volume**
 * opposite volume: **Trade.VolumeOpposite**
 
 ### 2. Get backet for **Trade.BaseAsset** = BaseBacket

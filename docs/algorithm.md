@@ -1,7 +1,7 @@
 # Source data
 
-* subscribe to trades stream from internal account
-* subscribe to market prices stream from external venues
+* subscribe to trades stream from an internal account
+* subscribe to market prices stream from an external venues
 
 # Model
 
@@ -15,19 +15,19 @@ Params:
 | `Asset` | asset associated with the basket |
 | `QuoteAsset` | asset to which the hedging position is quoted |
 | `HadgeTradingPair` | the trading instrument in which the basket position is hedged (`Backet Asset`/`Quote Asset` or `Quote Asset`/`Backet Asset`) |
-| `Price` | Current market prices by baccket instrument |
+| `Price` | current market price for bucket's asset pair |
 
-As a bucket we use an asset pair in the form of Asset/USD.
+As a bucket we use an asset pair in the form of `Asset`/`QuoteAsset`.
 
-**Trade** - deal on the observable account
+**Trade** - an executed deal on the observable account
 
 Params:
 
 | name | description |
 | ---- | ----------- |
 | `AssetPair` | trading instrument |
-| `BaseAsset` | base asset in trading instrument (BTC for BTC/USD)  |
-| `QuoteAsset` | quote asset in trading instrument (USD for BTC/USD) |
+| `BaseAsset` | base asset of the trading instrument (BTC for BTC/USD)  |
+| `QuoteAsset` | quote asset of the trading instrument (USD for BTC/USD) |
 | `Price` | trading price |
 | `Volume` | trade volume in base asset. Include direction: `sell` - negative value, `buy` - positive value |
 | `VolumeOpposite` | trade volume in quote asset. include direction: `sell` - positive value, `buy` - negative value |
@@ -38,28 +38,28 @@ Params:
 
 ### 2. Put trade in position list
 
-### 3. WHILE in position list exist position by instrumnet without backet
+### 3. WHILE in position list exist position by instrumnet without bucket
 
 ### 3.1. exclude position
 
-### 3.2. Get backet for **Position.BaseAsset** = BaseBacket
+### 3.2. Get bucket for **Position.BaseAsset** = BaseBucket
 
-### 3.3. IF (BaseBacket.QuoteAsset == Position.QuoteAsset)
-
-| instrument | price | volume | oppositeVolume |
-| ------ | ----- | ------ | -------------- |
-| Backet[Position.BaseAsset].AssetPair | ABS ( TradeVolumeOpposite / TradeVolume) | TradeVolume | TradeVolumeOpposite |
-
-### 3.4. IF (BaseBacket.QuoteAsset != Trade.quoteAsset)
-
-var CrossVolume = - ( TradeVolumeOpposite * BaseBacket[Position.QuoteAsset].Price( TradeVolumeOpposite > 0 ? "ask" : "bid" ) );
+### 3.3. IF (BaseBucket.QuoteAsset == Position.QuoteAsset)
 
 | instrument | price | volume | oppositeVolume |
 | ------ | ----- | ------ | -------------- |
-| Backet[Position.BaseAsset].AssetPair | ABS( CrossVolume / TradeVolume ) | TradeVolume | -CrossVolume |
-| Backet[Position.QuoteAsset].AssetPair | ABS( -CrossVolume / TradeVolumeOpposite ) | TradeVolumeOpposite | CrossVolume |
+| Bucket[Position.BaseAsset].AssetPair | ABS ( TradeVolumeOpposite / TradeVolume) | TradeVolume | TradeVolumeOpposite |
 
-### 4. Log change backet and appy change to backet aggregate position
+### 3.4. IF (BaseBucket.QuoteAsset != Trade.quoteAsset)
+
+var CrossVolume = - ( TradeVolumeOpposite * BaseBucket[Position.QuoteAsset].Price( TradeVolumeOpposite > 0 ? "ask" : "bid" ) );
+
+| instrument | price | volume | oppositeVolume |
+| ------ | ----- | ------ | -------------- |
+| Bucket[Position.BaseAsset].AssetPair | ABS( CrossVolume / TradeVolume ) | TradeVolume | -CrossVolume |
+| Bucket[Position.QuoteAsset].AssetPair | ABS( -CrossVolume / TradeVolumeOpposite ) | TradeVolumeOpposite | CrossVolume |
+
+### 4. Log change bucket and appy change to bucket aggregate position
 
 
 
@@ -71,7 +71,7 @@ Market:
 
 * BTCUSD: bid = 9200 ask = 9210
 
-Backets:
+Buckets:
 
 * BTCUSD
 
@@ -86,16 +86,16 @@ Trade:
 
 ---
 
-backet update:
+bucket update:
 
-| backet | price | volume | oppositeVolume |
+| bucket | price | volume | oppositeVolume |
 | ------ | ----- | ------ | -------------- |
 | BTCUSD | 9210 | 2 | -18420 |
 
 
-> IF (Backet[Trade.BaseAsset].QuoteAsset == Trade.quoteAsset)
+> IF (Bucket[Trade.BaseAsset].QuoteAsset == Trade.quoteAsset)
 
-| backet | price | volume | oppositeVolume |
+| bucket | price | volume | oppositeVolume |
 | ------ | ----- | ------ | -------------- |
 | BTCUSD | ABS ( TradeVolumeOpposite / TradeVolume) | TradeVolume | TradeVolumeOpposite |
 
@@ -108,7 +108,7 @@ Market:
 * EURUSD: bid = 1.14050 ask = 1.14055
 * BTCEUR: bid = 8066 ask = 8075
 
-Backets:
+Buckets:
 
 * BTCUSD
 * EURUSD
@@ -124,19 +124,19 @@ Trade:
 
 ---
 
-backet update:
+bucket update:
 
-| backet | price | volume | oppositeVolume |
+| bucket | price | volume | oppositeVolume |
 | ------ | ----- | ------ | -------------- |
 | BTCUSD | 9213.3629 | 1.5 | -13820.04435 |
 | EURUSD | 1.14055 | -12117 | 13820.04435 |
 
 
-> IF (Backet[Trade.BaseAsset].QuoteAsset != Trade.quoteAsset)
+> IF (Bucket[Trade.BaseAsset].QuoteAsset != Trade.quoteAsset)
 
-var CrossVolume = - ( TradeVolumeOpposite * BaseBacket[Trade.QuoteAsset].Price( TradeVolumeOpposite > 0 ? "ask" : "bid" ) );
+var CrossVolume = - ( TradeVolumeOpposite * BaseBucket[Trade.QuoteAsset].Price( TradeVolumeOpposite > 0 ? "ask" : "bid" ) );
 
-| backet | price | volume | oppositeVolume |
+| bucket | price | volume | oppositeVolume |
 | ------ | ----- | ------ | -------------- |
 | BTCUSD | ABS( CrossVolume / TradeVolume ) | TradeVolume | -CrossVolume |
 | EURUSD | ABS( -CrossVolume / TradeVolumeOpposite ) | TradeVolumeOpposite | CrossVolume |
@@ -146,7 +146,7 @@ var CrossVolume = - ( TradeVolumeOpposite * BaseBacket[Trade.QuoteAsset].Price( 
 
 ## Example 3
 
-Backets:
+Buckets:
 
 * BTCUSD
 * ETHUSD
@@ -162,11 +162,11 @@ Trade:
 * oppositeVolume = 
 
 
-> IF (Backet[Trade.BaseAsset].QuoteAsset != Trade.quoteAsset)
+> IF (Bucket[Trade.BaseAsset].QuoteAsset != Trade.quoteAsset)
 
-var CrossVolume = - ( TradeVolumeOpposite * BaseBacket[Trade.QuoteAsset].Price( TradeVolumeOpposite > 0 ? "ask" : "bid" ) );
+var CrossVolume = - ( TradeVolumeOpposite * BaseBucket[Trade.QuoteAsset].Price( TradeVolumeOpposite > 0 ? "ask" : "bid" ) );
 
-| backet | price | volume | oppositeVolume |
+| bucket | price | volume | oppositeVolume |
 | ------ | ----- | ------ | -------------- |
 | LKKBTC | | | |
 | BTCUSD | | | |

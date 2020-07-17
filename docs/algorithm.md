@@ -13,8 +13,8 @@ Params:
 | name | description |
 | ---- | ----------- |
 | `Asset` | asset associated with the basket |
-| QuoteAsset | asset to which the hedging position is quoted |
-| HadgeTradingPair | the trading instrument in which the basket position is hedged (`Backet Asset`/`Quote Asset` or `Quote Asset`/`Backet Asset`) |
+| `QuoteAsset` | asset to which the hedging position is quoted |
+| `HadgeTradingPair` | the trading instrument in which the basket position is hedged (`Backet Asset`/`Quote Asset` or `Quote Asset`/`Backet Asset`) |
 
 As bucket we will use pairs of the form: Traded asset to USD.
 
@@ -24,12 +24,12 @@ Params:
 
 | name | description |
 | ---- | ----------- |
-| AssetPair | trading instrument |
-| BaseAsset | base asset in trading instrument (BTC for BTC/USD)  |
-| QuoteAsset | quote asset in trading instrument (USD for BTC/USD) |
-| Price | trading price |
-| Volume | trade volume in base asset. Include direction: `sell` - negative value, `buy` - positive value |
-| VolumeOpposite | trade volume in quote asset. include direction: `sell` - positive value, `buy` - negative value |
+| `AssetPair` | trading instrument |
+| `BaseAsset` | base asset in trading instrument (BTC for BTC/USD)  |
+| `QuoteAsset` | quote asset in trading instrument (USD for BTC/USD) |
+| `Price` | trading price |
+| `Volume` | trade volume in base asset. Include direction: `sell` - negative value, `buy` - positive value |
+| `VolumeOpposite` | trade volume in quote asset. include direction: `sell` - positive value, `buy` - negative value |
 
 # Algorithm to handle incoming trade
 

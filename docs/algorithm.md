@@ -46,18 +46,18 @@ Params:
 
 ### 3.3. IF (BaseBacket.QuoteAsset == Position.QuoteAsset)
 
-| backet | price | volume | oppositeVolume |
+| instrument | price | volume | oppositeVolume |
 | ------ | ----- | ------ | -------------- |
-| Backet[Position.BaseAsset] | ABS ( TradeVolumeOpposite / TradeVolume) | TradeVolume | TradeVolumeOpposite |
+| Backet[Position.BaseAsset].AssetPair | ABS ( TradeVolumeOpposite / TradeVolume) | TradeVolume | TradeVolumeOpposite |
 
 ### 3.4. IF (BaseBacket.QuoteAsset != Trade.quoteAsset)
 
 var CrossVolume = - ( TradeVolumeOpposite * BaseBacket[Position.QuoteAsset].Price( TradeVolumeOpposite > 0 ? "ask" : "bid" ) );
 
-| backet | price | volume | oppositeVolume |
+| instrument | price | volume | oppositeVolume |
 | ------ | ----- | ------ | -------------- |
-| Backet[Position.BaseAsset] | ABS( CrossVolume / TradeVolume ) | TradeVolume | -CrossVolume |
-| Backet[Position.QuoteAsset] | ABS( -CrossVolume / TradeVolumeOpposite ) | TradeVolumeOpposite | CrossVolume |
+| Backet[Position.BaseAsset].AssetPair | ABS( CrossVolume / TradeVolume ) | TradeVolume | -CrossVolume |
+| Backet[Position.QuoteAsset].AssetPair | ABS( -CrossVolume / TradeVolumeOpposite ) | TradeVolumeOpposite | CrossVolume |
 
 ### 4. Log change backet and appy change to backet aggregate position
 

@@ -38,7 +38,7 @@ Params:
 
 ### 2. Put trade in position list
 
-### 3 WHILE in position list exist position by instrumnet without backet
+### 3. WHILE in position list exist position by instrumnet without backet
 
 ### 3.1. exclude position
 

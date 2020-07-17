@@ -138,18 +138,19 @@ var CrossVolume = - ( TradeVolumeOpposite * [<QuoteAsset>/USD].Price( TradeVolum
 
 
 
-**Example 3:**
+## Example 3
 
 Backets:
 
 * BTCUSD
 * ETHUSD
+* LKKBTC
 
 ---
 
 Trade:
 
-* AssetPair = ETHBTC
+* AssetPair = LKKETH
 * Price = 
 * volume = 
 * oppositeVolume = 
@@ -161,8 +162,9 @@ var CrossVolume = - ( TradeVolumeOpposite * [<QuoteAsset>/USD].Price( TradeVolum
 
 | backet | price | volume | oppositeVolume |
 | ------ | ----- | ------ | -------------- |
-| ETHUSD | ABS( CrossVolume / TradeVolume ) | TradeVolume | -CrossVolume |
-| BTCUSD | ABS( -CrossVolume / TradeVolumeOpposite ) | TradeVolumeOpposite | CrossVolume |
+| LKKBTC | | | |
+| ETHUSD | | | |
+| BTCUSD | | | |
 
 
 

@@ -35,41 +35,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Github workflow", "Github w
 		.github\workflows\validate-commit.yml = .github\workflows\validate-commit.yml
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{DB08FC9E-A784-4D4D-932C-DA320E3C5091}"
-	ProjectSection(SolutionItems) = preProject
-		README.md = README.md
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Kubernetes", "Kubernetes", "{EE2AA4BB-1E67-4074-B371-2C84F6469A72}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Settings", "Settings", "{AD4D20EE-C574-4F47-BD41-ECE62C1B27C0}"
-	ProjectSection(SolutionItems) = preProject
-		deployment\settings\common.json = deployment\settings\common.json
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Deployment", "Deployment", "{AD37D2C5-7CE6-41CD-9515-B65E5A46B96C}"
-	ProjectSection(SolutionItems) = preProject
-		deployment\readme.md = deployment\readme.md
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service-Hedger", "Service-Hedger", "{E892D1F5-DC4C-4D13-8B62-5D182B2A676C}"
-	ProjectSection(SolutionItems) = preProject
-		deployment\kubernetes\Service-Hedger\deployment.yaml = deployment\kubernetes\Service-Hedger\deployment.yaml
-		deployment\kubernetes\Service-Hedger\service.yaml = deployment\kubernetes\Service-Hedger\service.yaml
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Service-Hedger-Worker", "Service-Hedger-Worker", "{C58C8AEC-FB40-42A5-9E74-98BB95045A24}"
-	ProjectSection(SolutionItems) = preProject
-		deployment\kubernetes\Service-Hedger-Worker\deployment.yaml = deployment\kubernetes\Service-Hedger-Worker\deployment.yaml
-		deployment\kubernetes\Service-Hedger-Worker\service.yaml = deployment\kubernetes\Service-Hedger-Worker\service.yaml
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "product-name", "product-name", "{1A5AA860-E0C0-4BB4-91DD-3AF1A7ED74E2}"
-	ProjectSection(SolutionItems) = preProject
-		deployment\settings\product-name\common.json = deployment\settings\product-name\common.json
-		deployment\settings\product-name\service-name.json = deployment\settings\product-name\service-name.json
-	EndProjectSection
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hedger.InternalExchangeClient", "src\Hedger.InternalExchangeClient\Hedger.InternalExchangeClient.csproj", "{B9E4F9F1-AB63-47B8-9CD8-3EDB79A22657}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Hedger.Tests", "tests\Hedger.Tests\Hedger.Tests.csproj", "{F95187D4-E3E2-4BF1-9556-0D3893D2F44C}"
@@ -127,13 +92,6 @@ Global
 		{48E5261D-8A27-4496-88F1-EF76BE4279DE} = {655225E4-2F4C-4D07-82FB-7B4947EF5A7A}
 		{64093FB1-0321-4BC3-8832-8B51CB1BA61A} = {655225E4-2F4C-4D07-82FB-7B4947EF5A7A}
 		{54F26A6C-5B76-40E5-8E9C-2FA0551BC226} = {85EB7950-61F2-4B83-9F3E-F74ECCE0D3C8}
-		{DB08FC9E-A784-4D4D-932C-DA320E3C5091} = {85EB7950-61F2-4B83-9F3E-F74ECCE0D3C8}
-		{EE2AA4BB-1E67-4074-B371-2C84F6469A72} = {AD37D2C5-7CE6-41CD-9515-B65E5A46B96C}
-		{AD4D20EE-C574-4F47-BD41-ECE62C1B27C0} = {AD37D2C5-7CE6-41CD-9515-B65E5A46B96C}
-		{AD37D2C5-7CE6-41CD-9515-B65E5A46B96C} = {DB08FC9E-A784-4D4D-932C-DA320E3C5091}
-		{E892D1F5-DC4C-4D13-8B62-5D182B2A676C} = {EE2AA4BB-1E67-4074-B371-2C84F6469A72}
-		{C58C8AEC-FB40-42A5-9E74-98BB95045A24} = {EE2AA4BB-1E67-4074-B371-2C84F6469A72}
-		{1A5AA860-E0C0-4BB4-91DD-3AF1A7ED74E2} = {AD4D20EE-C574-4F47-BD41-ECE62C1B27C0}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {196C39E2-2F2E-46AB-BA2A-0D2E7E171B5A}

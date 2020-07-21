@@ -25,6 +25,8 @@ namespace Hedger.Common.Services
         {
             // todo: validate that assetId is in bucket.AssetPairId
 
+            // todo: validate that there is no bucket with both assets
+
             lock (_sync)
             {
                 _buckets[assetId] = bucket;
@@ -45,44 +47,61 @@ namespace Hedger.Common.Services
 
         public async Task HandleAsync(Trade trade)
         {
-            var baseAssetId = trade.BaseAssetId;
-            var quoteAssetId = trade.QuoteAssetId;
-
             lock (_sync)
             {
+                // 1. if there is only one bucket with both assets then update it
                 Bucket baseBucket;
                 Bucket quoteBucket;
 
-                _buckets.TryGetValue(baseAssetId, out baseBucket);
-                _buckets.TryGetValue(quoteAssetId, out quoteBucket);
+                _buckets.TryGetValue(trade.BaseAssetId, out baseBucket);
+                _buckets.TryGetValue(trade.QuoteAssetId, out quoteBucket);
 
-                if (baseBucket == null)
+                if (baseBucket != null)
                 {
-                    // todo: create a bucket for it? or make sure that it won't happen in the first place?
-                    throw new InvalidOperationException($"Can't find the bucket for '{baseAssetId}'.");
-                }
+                    if (baseBucket.OtherAssetId == trade.QuoteAssetId)
+                    {
+                        baseBucket.AddBaseVolume(trade.BaseVolume);
+                        baseBucket.AddQuoteVolume(trade.QuoteVolume);
 
-                if (quoteBucket == null)
-                {
-                    // todo: create a bucket for it? or make sure that it won't happen in the first place?
-                    throw new InvalidOperationException($"Can't find the bucket for '{quoteAssetId}'.");
-                }
+                        return;
+                    }
 
-                // 1. if there is a bucket with both assets then update it
-                if (baseBucket.OtherAssetId == quoteAssetId)
-                {
+                    // update 
                     baseBucket.AddBaseVolume(trade.BaseVolume);
-                    baseBucket.AddQuoteVolume(trade.QuoteVolume);
+
+                    if (quoteBucket == null)
+                        throw new InvalidOperationException("'Quote' bucket is null.");
+
+                    var conversionPrice = GetPrice(trade.QuoteAssetId, baseBucket.OtherAssetId);
+
+                    var bucketQuoteVolume = trade.QuoteVolume* conversionPrice;
+
+                    baseBucket.AddQuoteVolume(bucketQuoteVolume);
                 }
 
-                if (quoteBucket.OtherAssetId == baseAssetId)
+                if (quoteBucket != null)
                 {
-                    baseBucket.AddBaseVolume(trade.QuoteVolume);
-                    baseBucket.AddQuoteVolume(trade.BaseVolume);
+                    if (quoteBucket.OtherAssetId == trade.BaseAssetId)
+                    {
+                        quoteBucket.AddBaseVolume(trade.BaseVolume);
+                        quoteBucket.AddQuoteVolume(trade.QuoteVolume);
+
+                        return;
+                    }
+
+                    if (baseBucket == null)
+                        throw new InvalidOperationException("'Base' bucket is null.");
+
+                    // continue mirroring previous method
                 }
 
-
+                throw new InvalidOperationException("Both 'Base' and 'Quote' buckets are null.");
             }
+        }
+
+        private decimal GetPrice(string baseAssetId, string quoteAssetId)
+        {
+            throw new NotImplementedException();
         }
     }
 }

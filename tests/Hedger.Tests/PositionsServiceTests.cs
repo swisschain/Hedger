@@ -43,5 +43,17 @@ namespace Hedger.Tests
             Assert.Equal(1, updatedBucket.BaseVolume);
             Assert.Equal(-10000, updatedBucket.QuoteVolume);
         }
+
+        [Fact(Skip = "not ready yet")]
+        public async Task Simple2()
+        {
+            // arrange
+
+            // Buckets:
+            // BTC/USD
+
+            // Trade:
+            // USD/BTC
+        }
     }
 }

@@ -12,6 +12,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <PackageReference Include="Autofac" Version="5.2.0" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="6.0.0" />
+    <PackageReference Include="AutoMapper" Version="10.0.0" />
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="8.0.1" />
     <PackageReference Include="MassTransit" Version="6.2.5" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="3.1.3" />
     <PackageReference Include="Microsoft.Extensions.Hosting.Abstractions" Version="3.1.3" />
@@ -19,8 +23,11 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Domain\" />
     <Folder Include="Persistence\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Hedger.InternalExchangeClient\Hedger.InternalExchangeClient.csproj" />
   </ItemGroup>
 
 </Project>

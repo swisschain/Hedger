@@ -11,18 +11,18 @@ using LykkeTrade = Lykke.HftApi.ApiContract.Trade;
 
 namespace Hedger.Common.Services
 {
-    public class InternalTradesService: IHostedService
+    public class InternalTradesMediator: IHostedService
     {
         private const string LykkeExchange = "Lykke";
 
         private readonly LykkeExchangeClient _client;
         private readonly ITradeHandler[] _handlers;
-        private readonly ILogger<InternalTradesService> _logger;
+        private readonly ILogger<InternalTradesMediator> _logger;
 
-        public InternalTradesService(
+        public InternalTradesMediator(
             LykkeExchangeClient client,
             ITradeHandler[] handlers,
-            ILogger<InternalTradesService> logger)
+            ILogger<InternalTradesMediator> logger)
         {
             _client = client;
             _handlers = handlers;

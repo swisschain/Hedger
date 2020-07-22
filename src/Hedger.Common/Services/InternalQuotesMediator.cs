@@ -10,18 +10,18 @@ using Microsoft.Extensions.Logging;
 
 namespace Hedger.Common.Services
 {
-    public class InternalQuotesService: IHostedService
+    public class InternalQuotesMediator: IHostedService
     {
         private const string LykkeExchange = "Lykke";
 
         private readonly LykkeExchangeClient _client;
         private readonly IQuoteHandler[] _handlers;
-        private readonly ILogger<InternalQuotesService> _logger;
+        private readonly ILogger<InternalQuotesMediator> _logger;
 
-        public InternalQuotesService(
+        public InternalQuotesMediator(
             LykkeExchangeClient client,
             IQuoteHandler[] handlers,
-            ILogger<InternalQuotesService> logger)
+            ILogger<InternalQuotesMediator> logger)
         {
             _client = client;
             _handlers = handlers;

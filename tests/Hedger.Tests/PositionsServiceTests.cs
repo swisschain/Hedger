@@ -6,7 +6,6 @@ using Hedger.Common.Domain.Trades;
 using Hedger.Common.Services;
 using Microsoft.Extensions.Logging.Abstractions;
 using Xunit;
-using InternalQuotesService = Hedger.Common.Domain.Quotes.InternalQuotesService;
 
 namespace Hedger.Tests
 {

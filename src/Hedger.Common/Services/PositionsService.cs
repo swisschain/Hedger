@@ -1,7 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Hedger.Common.Domain.Buckets;
+using Hedger.Common.Domain.Quotes;
 using Hedger.Common.Domain.Trades;
 using Microsoft.Extensions.Logging;
 
@@ -11,10 +12,10 @@ namespace Hedger.Common.Services
     {
         private readonly object _sync = new object();
         private readonly Dictionary<string, Bucket> _buckets = new Dictionary<string, Bucket>();
-        private readonly Domain.Quotes.InternalQuotesService _internalQuotesService;
+        private readonly InternalQuotesService _internalQuotesService;
         private readonly ILogger<PositionsService> _logger;
 
-        public PositionsService(Domain.Quotes.InternalQuotesService internalQuotesService, ILogger<PositionsService> logger)
+        public PositionsService(InternalQuotesService internalQuotesService, ILogger<PositionsService> logger)
         {
             _internalQuotesService = internalQuotesService;
             _logger = logger;
@@ -46,64 +47,20 @@ namespace Hedger.Common.Services
 
         public async Task HandleAsync(Trade trade)
         {
+            var bucketUpdates = new List<BucketUpdate>();
+
+            var bucketUpdate = new BucketUpdate(trade.AssetPairId, trade.BaseAssetId, trade.QuoteAssetId, trade.BaseVolume, trade.QuoteVolume);
+            bucketUpdates.Add(bucketUpdate);
+
+            var allBuckets = new List<Bucket>();
+
             lock (_sync)
             {
-                // 1. if there is only one bucket with both assets then update it
-                Bucket baseBucket;
-                Bucket quoteBucket;
-
-                _buckets.TryGetValue(trade.BaseAssetId, out baseBucket);
-                _buckets.TryGetValue(trade.QuoteAssetId, out quoteBucket);
-
-                if (baseBucket != null)
-                {
-                    if (baseBucket.OtherAssetId == trade.QuoteAssetId)
-                    {
-                        baseBucket.AddBaseVolume(trade.BaseVolume);
-                        baseBucket.AddQuoteVolume(trade.QuoteVolume);
-
-                        return;
-                    }
-
-                    // update 
-                    baseBucket.AddBaseVolume(trade.BaseVolume);
-
-                    if (quoteBucket == null)
-                        throw new InvalidOperationException("'Quote' bucket is null.");
-
-                    var conversionPrice = GetPrice(trade.QuoteAssetId, baseBucket.OtherAssetId);
-
-                    var bucketQuoteVolume = trade.QuoteVolume* conversionPrice;
-
-                    baseBucket.AddQuoteVolume(bucketQuoteVolume);
-                }
-
-
-
-                if (quoteBucket != null)
-                {
-                    if (quoteBucket.OtherAssetId == trade.BaseAssetId)
-                    {
-                        quoteBucket.AddBaseVolume(trade.BaseVolume);
-                        quoteBucket.AddQuoteVolume(trade.QuoteVolume);
-
-                        return;
-                    }
-
-                    if (baseBucket == null)
-                        throw new InvalidOperationException("'Base' bucket is null.");
-
-                    // continue mirroring previous part
-                    throw new NotImplementedException();
-                }
-
-                throw new InvalidOperationException("Both 'Base' and 'Quote' buckets are null.");
+                allBuckets.AddRange(
+                    _buckets.Values.ToList());
             }
-        }
 
-        private decimal GetPrice(string baseAssetId, string quoteAssetId)
-        {
-            throw new NotImplementedException();
+            BucketUpdateService.GetUpdateWithoutBucket(bucketUpdates, allBuckets);
         }
     }
 }

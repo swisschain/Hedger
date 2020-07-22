@@ -4,7 +4,7 @@
     {
         public string AssetId { get; }
 
-        public string OtherAssetId { get { return AssetId == BaseAssetId ? QuoteAssetId : BaseAssetId; } }
+        public bool IsStraight { get; }
 
         public string AssetPairId { get; }
 

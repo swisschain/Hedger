@@ -28,7 +28,7 @@ namespace Hedger.Common.Services
                 .WithParameter("apiKey", _config.LykkeHftClient.ApiKey)
                 .SingleInstance();
 
-            builder.RegisterType<InternalQuotesService>()
+            builder.RegisterType<InternalQuotesMediator>()
                 .AsSelf()
                 .As<IHostedService>()
                 .SingleInstance();

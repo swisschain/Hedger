@@ -109,7 +109,7 @@ bucket update:
 
 Market:
 
-* BTCUSD: bid = 9200 ask = 9210
+* BTCUSD: bid = 9200 ask = 9213.3629
 * EURUSD: bid = 1.14050 ask = 1.14055
 * BTCEUR: bid = 8066 ask = 8075
 
@@ -125,7 +125,7 @@ Trade:
 * AssetPair = BTCEUR
 * Price = 8078
 * volume = 1.5 (`buy`)
-* oppositeVolume = -12117.0
+* oppositeVolume = -12117
 
 ---
 
@@ -139,7 +139,7 @@ bucket update:
 
 > IF (Bucket[Trade.BaseAsset].QuoteAsset != Trade.quoteAsset)
 
-var CrossVolume = - ( TradeVolumeOpposite * BaseBucket[Trade.QuoteAsset].Price( TradeVolumeOpposite > 0 ? "ask" : "bid" ) );
+var CrossVolume = - ( TradeVolumeOpposite * Market[BaseBucket.QuoteAsset, Trade.QuoteAsset].Price( TradeVolumeOpposite > 0 ? "ask" : "bid" ) );
 
 | bucket | price | volume | oppositeVolume |
 | ------ | ----- | ------ | -------------- |

@@ -17,7 +17,7 @@ namespace Hedger.Common.Services
 
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterType<InternalQuotesService>()
+            builder.RegisterType<Domain.Quotes.InternalQuotesService>()
                 .AsSelf()
                 .As<IQuoteHandler>()
                 .SingleInstance();
@@ -28,7 +28,7 @@ namespace Hedger.Common.Services
                 .WithParameter("apiKey", _config.LykkeHftClient.ApiKey)
                 .SingleInstance();
 
-            builder.RegisterType<InternalExchangeQuotesMediator>()
+            builder.RegisterType<InternalQuotesService>()
                 .AsSelf()
                 .As<IHostedService>()
                 .SingleInstance();

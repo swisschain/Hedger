@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Hedger.Common.Domain.Buckets;
-using Hedger.Common.Domain.Quotes;
 using Hedger.Common.Domain.Trades;
 using Microsoft.Extensions.Logging;
 
@@ -12,10 +11,10 @@ namespace Hedger.Common.Services
     {
         private readonly object _sync = new object();
         private readonly Dictionary<string, Bucket> _buckets = new Dictionary<string, Bucket>();
-        private readonly InternalQuotesService _internalQuotesService;
+        private readonly Domain.Quotes.InternalQuotesService _internalQuotesService;
         private readonly ILogger<PositionsService> _logger;
 
-        public PositionsService(InternalQuotesService internalQuotesService, ILogger<PositionsService> logger)
+        public PositionsService(Domain.Quotes.InternalQuotesService internalQuotesService, ILogger<PositionsService> logger)
         {
             _internalQuotesService = internalQuotesService;
             _logger = logger;
@@ -23,7 +22,7 @@ namespace Hedger.Common.Services
 
         public void AddBucket(string assetId, Bucket bucket)
         {
-            // todo: validate that assetId is in bucket.AssetPairId
+            // todo: validate that assetId is in the bucket.AssetPairId
 
             // todo: validate that there is no bucket with both assets
 
@@ -79,6 +78,8 @@ namespace Hedger.Common.Services
                     baseBucket.AddQuoteVolume(bucketQuoteVolume);
                 }
 
+
+
                 if (quoteBucket != null)
                 {
                     if (quoteBucket.OtherAssetId == trade.BaseAssetId)
@@ -92,7 +93,8 @@ namespace Hedger.Common.Services
                     if (baseBucket == null)
                         throw new InvalidOperationException("'Base' bucket is null.");
 
-                    // continue mirroring previous method
+                    // continue mirroring previous part
+                    throw new NotImplementedException();
                 }
 
                 throw new InvalidOperationException("Both 'Base' and 'Quote' buckets are null.");

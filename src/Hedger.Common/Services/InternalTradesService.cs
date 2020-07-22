@@ -1,8 +1,6 @@
-﻿using System.Globalization;
-using System.IO;
+﻿using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-using Hedger.Common.Domain.Quotes;
 using Hedger.Common.Domain.Trades;
 using Hedger.InternalExchangeClient;
 using Lykke.HftApi.ApiContract;
@@ -13,18 +11,18 @@ using LykkeTrade = Lykke.HftApi.ApiContract.Trade;
 
 namespace Hedger.Common.Services
 {
-    public class InternalExchangeTradesMediator: IHostedService
+    public class InternalTradesService: IHostedService
     {
         private const string LykkeExchange = "Lykke";
 
         private readonly LykkeExchangeClient _client;
         private readonly ITradeHandler[] _handlers;
-        private readonly ILogger<InternalExchangeTradesMediator> _logger;
+        private readonly ILogger<InternalTradesService> _logger;
 
-        public InternalExchangeTradesMediator(
+        public InternalTradesService(
             LykkeExchangeClient client,
             ITradeHandler[] handlers,
-            ILogger<InternalExchangeTradesMediator> logger)
+            ILogger<InternalTradesService> logger)
         {
             _client = client;
             _handlers = handlers;

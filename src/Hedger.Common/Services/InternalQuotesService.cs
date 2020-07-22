@@ -1,6 +1,5 @@
 ﻿using System.Globalization;
 using System.IO;
-using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using Hedger.Common.Domain.Quotes;
@@ -11,18 +10,18 @@ using Microsoft.Extensions.Logging;
 
 namespace Hedger.Common.Services
 {
-    public class InternalExchangeQuotesMediator: IHostedService
+    public class InternalQuotesService: IHostedService
     {
         private const string LykkeExchange = "Lykke";
 
         private readonly LykkeExchangeClient _client;
         private readonly IQuoteHandler[] _handlers;
-        private readonly ILogger<InternalExchangeQuotesMediator> _logger;
+        private readonly ILogger<InternalQuotesService> _logger;
 
-        public InternalExchangeQuotesMediator(
+        public InternalQuotesService(
             LykkeExchangeClient client,
             IQuoteHandler[] handlers,
-            ILogger<InternalExchangeQuotesMediator> logger)
+            ILogger<InternalQuotesService> logger)
         {
             _client = client;
             _handlers = handlers;

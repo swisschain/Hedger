@@ -25,7 +25,7 @@ namespace Hedger.Tests
             var btcUsdBucket = new Bucket("BTC", "BTCUSD", "BTC", "USD");
 
             var internalQuotesService = new InternalQuotesService(NullLogger<InternalQuotesService>.Instance);
-            var positionService = new PositionsService(internalQuotesService, NullLogger<PositionsService>.Instance);
+            var positionService = new PositionService(internalQuotesService, NullLogger<PositionService>.Instance);
 
             var bucket = new Bucket("BTC", "BTCUSD", "BTC", "USD");
             positionService.AddBucket("BTC", bucket);

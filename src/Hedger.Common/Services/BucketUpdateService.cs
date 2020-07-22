@@ -5,25 +5,25 @@ namespace Hedger.Common.Services
 {
     public class BucketUpdateService
     {
-        public static BucketUpdate GetUpdateWithoutBucket(
+        public static BucketUpdate GetUpdateWithNoBucket(
             IReadOnlyCollection<BucketUpdate> bucketUpdates,
             IReadOnlyCollection<Bucket> allBuckets)
         {
-            // todo: optimize
+            // todo: optimize this search with dictionaries
             foreach (var bucketUpdate in bucketUpdates)
             {
                 foreach (var bucket in allBuckets)
                 {
-                    var isStraight = bucketUpdate.BaseAssetId == bucket.BaseAssetId
+                    var isStraightFound = bucketUpdate.BaseAssetId == bucket.BaseAssetId
                                   && bucketUpdate.QuoteAssetId == bucket.QuoteAssetId;
 
-                    if (isStraight)
+                    if (isStraightFound)
                         continue;
 
-                    var isReversed = bucketUpdate.BaseAssetId == bucket.QuoteAssetId
+                    var isReversedFound = bucketUpdate.BaseAssetId == bucket.QuoteAssetId
                                    && bucketUpdate.QuoteAssetId == bucket.BaseAssetId;
 
-                    if (isReversed)
+                    if (isReversedFound)
                         continue;
 
                     return bucketUpdate;

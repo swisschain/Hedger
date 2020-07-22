@@ -5,17 +5,20 @@ namespace Hedger.Common.Domain.Quotes
     public class Quote
     {
         public string Source { get; }
-        public string AssetPair { get; }
-        public DateTime Time { get; }
+        public string AssetPairId { get; }
+        // todo: has to be filled in constructor
+        public string BaseAssetId { get; }
+        public string QuoteAssetId { get; }
         public decimal Ask { get; }
         public decimal Bid { get; }
+        public DateTime Timestamp { get; }
         public decimal Mid { get; }
         public decimal Spread { get; }
 
-        public Quote(string assetPair, DateTime time, decimal ask, decimal bid, string source)
+        public Quote(string assetPairId, DateTime timestamp, decimal ask, decimal bid, string source)
         {
-            AssetPair = assetPair;
-            Time = time;
+            AssetPairId = assetPairId;
+            Timestamp = timestamp;
             Ask = ask;
             Bid = bid;
             Mid = (ask + bid) / 2m;

@@ -9,6 +9,7 @@ namespace Hedger.Common.Domain.Quotes
     // todo: asset pair service to 
     public class InternalQuotesService : IQuoteHandler
     {
+        // todo: replace key with [BaseAsset, QuoteAsset].OrderBy(x => x.Name)
         private readonly ConcurrentDictionary<string, Quote> _cache = new ConcurrentDictionary<string, Quote>();
         private readonly ILogger<InternalQuotesService> _logger;
 
@@ -20,7 +21,7 @@ namespace Hedger.Common.Domain.Quotes
         public async Task HandleAsync(Quote quote)
         {
             // todo: check that timestamp is later then existed
-            _cache[quote.AssetPair] = quote;
+            _cache[quote.AssetPairId] = quote;
         }
 
         public async Task<IReadOnlyCollection<Quote>> GetAllAsync()
@@ -36,6 +37,19 @@ namespace Hedger.Common.Domain.Quotes
                 return quote;
 
             return null;
+        }
+
+        public Quote GetQuote(string baseAssetId, string quoteAssetId)
+        {
+            // todo: optimize
+            var allQuotes = _cache.Values.ToList();
+
+            var result = allQuotes.FirstOrDefault(x => x.BaseAssetId == baseAssetId && x.QuoteAssetId == quoteAssetId 
+                                                    || x.BaseAssetId == quoteAssetId && x.QuoteAssetId == baseAssetId);
+
+            // todo: result quote has to be reversed if it's quoteAssetId/baseAssetId
+
+            return result;
         }
     }
 }

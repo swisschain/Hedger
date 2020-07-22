@@ -15,7 +15,7 @@ Params:
 | `Asset` | asset associated with the basket |
 | `QuoteAsset` | asset to which the hedging position is quoted |
 | `HadgeTradingPair` | the trading instrument in which the basket position is hedged (`Backet Asset`/`Quote Asset` or `Quote Asset`/`Backet Asset`) |
-| `Price` | current market price for bucket's asset pair |
+| `Price` | current average price for bucket's asset pair |
 
 As a bucket we use an asset pair in the form of `Asset`/`QuoteAsset`.
 
@@ -37,6 +37,11 @@ Params:
 ### 1. Receive Trade
 
 ### 2. Put the trade into position list
+
+| instrument | price | volume | oppositeVolume |
+| ------ | ----- | ------ | -------------- |
+| trade.AssetPair | ABS ( TradeVolumeOpposite / TradeVolume) | trade.Volume | Trade.VolumeOpposite |
+
 
 ### 3. WHILE in position list exists a position with an instrument wich is not bucket
 
@@ -173,7 +178,19 @@ var CrossVolume = - ( TradeVolumeOpposite * BaseBucket[Trade.QuoteAsset].Price( 
 | ETHUSD | | | |
 
 
+## Example 4
 
+Buckets:
+
+* USDCHF
+---
+
+Trade:
+
+* AssetPair = CHFUSD
+* Price = 
+* volume = 
+* oppositeVolume = 
 
 
 

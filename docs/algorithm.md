@@ -153,9 +153,9 @@ var CrossVolume = - ( TradeVolumeOpposite * BaseBucket[Trade.QuoteAsset].Price( 
 
 Buckets:
 
-* BTCUSD
-* ETHUSD
-* LKKBTC
+* BTC = BTCUSD
+* ETH = ETHUSD
+* LKK = LKKBTC
 
 ---
 
